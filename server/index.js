@@ -68,6 +68,7 @@ app.post('/reviews/:listingId', (req, res) => {
 });
 
 app.put('/reviews/:listingId', (req, res) => {
+  let reviewId = req.body._id;
   let aggregateObject = {
     reviewText: req.body.reviewText,
   };
@@ -77,7 +78,7 @@ app.put('/reviews/:listingId', (req, res) => {
     } else {
       res.status(200).send('changes saved to database');
     }
-  }, req.body._id, aggregateObject);
+  }, reviewId, aggregateObject);
 });
 
 const port = process.env.PORT || 3003;
