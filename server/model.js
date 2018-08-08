@@ -20,6 +20,24 @@ module.exports = {
           cb(combinedReview);
         });
       });
+    },
+    postReviews: function(cb, content) {
+      let newReview = new db.Review(content);
+      newReview.save((err, results) => {
+        if (err) {
+          cb(err);
+        }
+        cb(null, results);
+      });
+    },
+    updateReviews: function(cb, id, content) {
+      db.Review.findByIdAndUpdate(id, content, {new: true}, (err, results) => {
+        if (err) {
+          cb(err);
+        } else {
+          cb(null, results);
+        }
+      });
     }
   }
 };
